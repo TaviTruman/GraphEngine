@@ -135,6 +135,7 @@ _return:
             {
                 try
                 {
+                    Log.WriteLine(LogLevel.Debug, $"Executing startup task {task.GetType().FullName}");
                     task.Run();
                 }
                 catch (Exception ex)
@@ -152,7 +153,6 @@ _return:
         private static TrinityErrorCode _ScanForTSLStorageExtension()
         {
             Log.WriteLine(LogLevel.Info, "Scanning for TSL storage extension.");
-            var priorities = ExtensionConfig.Instance.ResolveTypePriorities();
 
             var loaded_tuple = AssemblyUtility
                   .ForAllAssemblies(_LoadTSLStorageExtension)
@@ -230,6 +230,8 @@ _return:
             // and forcibly enumerate its custom attributes. When the import extension
             // attribute is enumerated, it will trigger CLR to load its assembly, and thus
             // AppDomain.CurrentDomain.GetAssemblies will contain the extension assembly.
+            Log.WriteLine(LogLevel.Info, "Loading Graph Engine Extensions.");
+            AssemblyUtility.LoadReferences();
             AssemblyUtility.ForAllAssemblies(_ => _.GetCustomAttributes().ToList());
         }
 

@@ -6,19 +6,22 @@ using FanoutSearch.Protocols.TSL;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FanoutSearch
 {
+    [DebuggerDisplay("Path = {ToString()}")]
     public class PathDescriptor : IEnumerable<NodeDescriptor>
     {
-        List<NodeDescriptor> m_paths;
+        List<NodeDescriptor> m_nodes;
 
         public PathDescriptor(ResultPathDescriptor_Accessor pda, List<List<string>> selectFields)
         {
-            m_paths = new List<NodeDescriptor>();
+            m_nodes = new List<NodeDescriptor>();
             int idx = 0;
             List<string> empty_field_selections = new List<string>();
             foreach (var n in pda.nodes)
@@ -27,13 +30,15 @@ namespace FanoutSearch
                     n.field_selections.Select(_ =>(string)_).ToList() :
                     empty_field_selections;
 
-                m_paths.Add(new NodeDescriptor(selectFields[idx++], field_selections, n.id));
+                m_nodes.Add(new NodeDescriptor(selectFields[idx++], field_selections, n.id));
             }
         }
 
+        public NodeDescriptor this[int index] => m_nodes[index];
+
         public IEnumerator<NodeDescriptor> GetEnumerator()
         {
-            return m_paths.GetEnumerator();
+            return m_nodes.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -43,23 +48,25 @@ namespace FanoutSearch
 
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder();
-            Serialize(sb);
-            return sb.ToString();
+            using (StringWriter sw = new StringWriter())
+            {
+                Serialize(sw);
+                return sw.ToString();
+            }
         }
 
-        internal void Serialize(StringBuilder sb)
+        internal void Serialize(TextWriter writer)
         {
             bool first = true;
-            sb.Append('[');
-            foreach (var node in m_paths)
+            writer.Write('[');
+            foreach (var node in m_nodes)
             {
                 if (first) { first = false; }
-                else { sb.Append(','); }
+                else { writer.Write(','); }
 
-                sb.Append(node);
+                node.Serialize(writer);
             }
-            sb.Append(']');
+            writer.Write(']');
         }
     }
 }

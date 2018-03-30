@@ -8,12 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GraphEngine.LIKQ" Version="1.0.9083" />
+    <PackageReference Include="GraphEngine.Azure.BlobStorage" Version="2.0.9328" />
+    <PackageReference Include="GraphEngine.LIKQ" Version="2.0.9328" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Trinity.ServiceFabric.Infrastructure\Trinity.ServiceFabric.Infrastructure.csproj" />
-    <ProjectReference Include="..\Trinity.ServiceFabric.Listeners\Trinity.ServiceFabric.Listeners.csproj" />
+    <ProjectReference Include="..\Trinity.ServiceFabric.Remoting\Trinity.ServiceFabric.Remoting.csproj" />
+    <ProjectReference Include="..\Trinity.ServiceFabric.SampleProtocols\Trinity.ServiceFabric.SampleProtocols.csproj" />
   </ItemGroup>
 
 </Project>

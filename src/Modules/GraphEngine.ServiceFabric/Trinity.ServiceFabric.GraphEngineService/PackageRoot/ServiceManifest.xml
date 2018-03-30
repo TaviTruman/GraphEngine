@@ -36,6 +36,10 @@
            This endpoint is configured through a ReplicatorSettings config section in the Settings.xml
            file under the ConfigPackage. -->
       <Endpoint Name="ReplicatorEndpoint" />
+      <!-- This endpoint is used by the trinity-over-remoting proxy, running on fabric service remoting.
+           Remove this, and the reference to Trinity.ServiceFabric.Remoting, if you do not want to enable
+           this feature. -->
+      <Endpoint Name="TrinityServiceFabricRemotingEndpoint" />
     </Endpoints>
   </Resources>
 </ServiceManifest>

@@ -160,7 +160,7 @@ namespace Trinity.DynamicCluster.Communication
         {
             foreach (var cell in request.cells)
             {
-                Global.LocalStorage.SaveCell(cell.id, cell.content.CellPtr, cell.content.length, cell.cell_type);
+                Global.LocalStorage.SaveCell(cell.id, cell.content.m_ptr, cell.content.length, cell.cell_type);
             }
             //TODO throttle
             response.throttle = false;
@@ -203,6 +203,23 @@ namespace Trinity.DynamicCluster.Communication
                 response.errno = Errno.E_OK;
             }
             catch
+            {
+                response.errno = Errno.E_FAIL;
+            }
+        }
+
+        public override void QueryReplicaHealthHandler(ErrnoResponseWriter response)
+        {
+            response.errno = Errno.E_OK;
+        }
+
+        public override void QueryPartitionHealthHandler(ErrnoResponseWriter response)
+        {
+            if ((m_memorycloud as DynamicMemoryCloud).m_healthmon.IsPartitionHealthy())
+            {
+                response.errno = Errno.E_OK;
+            }
+            else
             {
                 response.errno = Errno.E_FAIL;
             }

@@ -16,7 +16,7 @@
     <PackageIconUrl>https://www.graphengine.io/img/logo-64x64.png</PackageIconUrl>
     <PackageLicenseUrl>https://github.com/Microsoft/GraphEngine/blob/master/LICENSE.md</PackageLicenseUrl>
     <Copyright>Copyright 2018</Copyright>
-    <Version>1.0.9083</Version>
+    <Version>2.0.9328</Version>
     <RepositoryUrl>https://github.com/Microsoft/GraphEngine/</RepositoryUrl>
   </PropertyGroup>
 
@@ -29,7 +29,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GraphEngine.Core" Version="1.0.9083" />
+    <PackageReference Include="GraphEngine.Core" Version="2.0.9328" />
     <PackageReference Include="System.ValueTuple" Version="4.4.0" />
   </ItemGroup>
 
@@ -39,19 +39,12 @@
 
   <ItemGroup>
     <Content Include="..\..\..\..\bin\trinity_ffi.dll">
-      <PackagePath>lib\netstandard2.0</PackagePath>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\..\bin\trinity_ffi.dll">
-      <PackagePath>lib\net461</PackagePath>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <PackagePath>runtimes\win-x64\native</PackagePath>
     </Content>
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Trinity.Storage.Composite">
-      <HintPath>..\..\..\..\bin\netstandard2.0\Trinity.Storage.Composite.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\..\GraphEngine.Jit\GraphEngine.Jit\GraphEngine.Jit.fsproj" />
   </ItemGroup>
 
 </Project>

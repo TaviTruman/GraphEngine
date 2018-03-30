@@ -49,16 +49,6 @@ namespace FanoutSearch
 #endif
         }
 
-        /// <returns>returns null if predicate is not compiled and cached.</returns>
-        internal Func<ICellAccessor, Action> GetCachedPredicate(string predicate)
-        {
-#if NETSTANDARD2_0
-            return m_predicate_cache.Get<Func<ICellAccessor, Action>>(predicate);
-#else
-            return (Func<ICellAccessor, Action>)m_predicate_cache[GetCachedPredicateKey(predicate)];
-#endif
-        }
-
         internal List<Func<ICellAccessor, Action>> CompileQueryPredicates(List<string> list)
         {
             var result = new List<Func<ICellAccessor, Action>>();

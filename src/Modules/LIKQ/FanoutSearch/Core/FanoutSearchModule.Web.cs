@@ -19,6 +19,7 @@ using Trinity.Diagnostics;
 using Trinity.Network.Http;
 using System.Globalization;
 using Trinity.Network.Messaging;
+using System.Threading;
 
 namespace FanoutSearch
 {
@@ -36,9 +37,11 @@ namespace FanoutSearch
         public string JsonQuery(string queryString, string queryPath = "")
         {
             FanoutSearchDescriptor fanoutSearch_desc = _JsonQuery_impl(queryString, queryPath);
-            StringWriter sw = new StringWriter();
-            _SerializePaths(fanoutSearch_desc, sw);
-            return sw.GetStringBuilder().ToString();
+            using (StringWriter sw = new StringWriter(new StringBuilder(128, s_max_fanoutmsg_size)))
+            {
+                _SerializePaths(fanoutSearch_desc, sw);
+                return sw.ToString();
+            }
         }
 
         /// <summary>
@@ -53,9 +56,11 @@ namespace FanoutSearch
         public string LambdaQuery(string lambda)
         {
             FanoutSearchDescriptor fanoutSearch_desc = _LambdaQuery_impl(lambda);
-            StringWriter sw = new StringWriter();
-            _SerializePaths(fanoutSearch_desc, sw);
-            return sw.GetStringBuilder().ToString();
+            using (StringWriter sw = new StringWriter(new StringBuilder(128, s_max_fanoutmsg_size)))
+            {
+                _SerializePaths(fanoutSearch_desc, sw);
+                return sw.ToString();
+            }
         }
 
         private static FanoutSearchDescriptor _JsonQuery_impl(string queryString, string queryPath)
@@ -115,7 +120,7 @@ namespace FanoutSearch
                     Enumerable.Concat(_, reader.infoList.Select(infoAccessor => (NodeInfo)infoAccessor)));
 
             string result_string = "[" + string.Join(",", results.Select(_ =>
-                                            string.Format(CultureInfo.InvariantCulture, @"{{""CellID"": {0}, ""type_object_name"": {1}}}",
+                                            string.Format(CultureInfo.InvariantCulture, @"{{""CellId"": {0}, ""type_object_name"": {1}}}",
                                                 _.id,
                                                 JsonStringProcessor.escape(_.values.First())))) + "]";
 
@@ -164,7 +169,7 @@ namespace FanoutSearch
 
             if (!s_enable_external_query)
             {
-                throw new Exception("Lambda queray not enabled.");
+                throw new Exception("Lambda query not enabled.");
             }
 
             try
@@ -204,29 +209,30 @@ namespace FanoutSearch
 
         private static void _SerializePaths(FanoutSearchDescriptor search, TextWriter writer)
         {
-            var paths = search.ToList().AsParallel().Select(p =>
+            try
             {
-                StringBuilder builder = new StringBuilder();
-                p.Serialize(builder);
-                return builder.ToString();
-            });
-            bool first = true;
-            writer.Write('[');
+                writer.Write('[');
+                search.FirstOrDefault()?.Serialize(writer);
+                foreach (var path in search.Skip(1))
+                {
+                    writer.Write(',');
+                    path.Serialize(writer);
+                }
 
-            long len = 0;
-
-            foreach (var path in paths)
-            {
-                len += path.Length;
-                if (len > s_max_rsp_size) throw new MessageTooLongException();
-                if (first) { first = false; }
-                else { writer.Write(','); }
-
-                writer.Write(path);
+                writer.Write(']');
             }
-
-            writer.Write(']');
-
+            catch (AggregateException ex) when (ex.InnerExceptions.Any(_ => _ is MessageTooLongException || _ is OutOfMemoryException))
+            {
+                throw new MessageTooLongException();
+            }
+            catch (OutOfMemoryException)
+            {
+                throw new MessageTooLongException();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                throw new MessageTooLongException();
+            }
         }
 
         private static bool QueryPathInvalid(string queryPath)

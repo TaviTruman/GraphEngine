@@ -1,7 +1,11 @@
-﻿using System;
-using System.Reflection;
-using System.Runtime.InteropServices;
+/***********************************
+
+  Auto-generated from FFIMethods.tt
+
+ ***********************************/
+
 using Trinity.Diagnostics;
+using Trinity.FFI.Interop;
 
 namespace Trinity.FFI
 {
@@ -9,34 +13,36 @@ namespace Trinity.FFI
     {
         private static TRINITY_INTERFACES s_interfaces = new TRINITY_INTERFACES
         {
-            async_registry = TrinityWrapper.trinity_ffi_async_registry,
-            async_send = TrinityWrapper.trinity_ffi_async_send,
-            cell_appendfield = TrinityWrapper.trinity_ffi_cell_append,
-            cell_getfield = TrinityWrapper.trinity_ffi_cell_get,
-            cell_getid = TrinityWrapper.trinity_ffi_cell_getid,
-            cell_dispose = TrinityWrapper.trinity_ffi_cell_dispose,
-            cell_fieldenum_get = TrinityWrapper.trinity_ffi_cellenum_get,
-            cell_fieldenum_movenext = TrinityWrapper.trinity_ffi_cellenum_movenext,
-            cell_fieldenum_current = TrinityWrapper.trinity_ffi_cellenum_current,
-            cell_fieldenum_dispose = TrinityWrapper.trinity_ffi_cellenum_dispose,
-            cell_fieldinfo_name = TrinityWrapper.trinity_ffi_fieldinfo_name,
-            cell_hasfield = TrinityWrapper.trinity_ffi_cell_has,
-            cell_removefield = TrinityWrapper.trinity_ffi_cell_delete,
-            cell_setfield = TrinityWrapper.trinity_ffi_cell_set,
-            cell_setid = TrinityWrapper.trinity_ffi_cell_setid,
-            cell_tostring = TrinityWrapper.trinity_ffi_cell_tostring,
-            cloud_loadcell = TrinityWrapper.trinity_ffi_cloud_loadcell,
-            cloud_removecell = TrinityWrapper.trinity_ffi_cloud_removecell,
-            cloud_savecell = TrinityWrapper.trinity_ffi_cloud_savecell,
-            local_loadcell = TrinityWrapper.trinity_ffi_local_loadcell,
-            local_removecell = TrinityWrapper.trinity_ffi_local_removecell,
-            local_savecell_1 = TrinityWrapper.trinity_ffi_local_savecell_1,
-            local_savecell_2 = TrinityWrapper.trinity_ffi_local_savecell_2,
-            newcell_1 = TrinityWrapper.trinity_ffi_newcell_1,
-            newcell_2 = TrinityWrapper.trinity_ffi_newcell_2,
-            newcell_3 = TrinityWrapper.trinity_ffi_newcell_3,
-            sync_registry = TrinityWrapper.trinity_ffi_sync_registry,
-            sync_send = TrinityWrapper.trinity_ffi_sync_send,
+			accessor_use_1 = Accessor.use_1,
+			accessor_use_2 = Accessor.use_2,
+			accessor_use_3 = Accessor.use_3,
+			cell_new_1 = Cell.new_1,
+			cell_new_2 = Cell.new_2,
+			cell_new_3 = Cell.new_3,
+			cell_tostring = Cell.tostring,
+			cell_getid = Cell.getid,
+			cell_setid = Cell.setid,
+			cell_get = Cell.get,
+			cell_has = Cell.has,
+			cell_set = Cell.set,
+			cell_append = Cell.append,
+			cell_delete = Cell.delete,
+			cloud_sync_registry = CloudStorage.sync_registry,
+			cloud_async_registry = CloudStorage.async_registry,
+			cloud_sync_send = CloudStorage.sync_send,
+			cloud_async_send = CloudStorage.async_send,
+			cloud_loadcell = CloudStorage.loadcell,
+			cloud_savecell = CloudStorage.savecell,
+			enum_next = Enumeration.next,
+			gc_free = GC.free,
+			gc_dispose = GC.dispose,
+			local_loadcell = LocalStorage.loadcell,
+			local_savecell_1 = LocalStorage.savecell_1,
+			local_savecell_2 = LocalStorage.savecell_2,
+			local_savecell_3 = LocalStorage.savecell_3,
+			local_savecell_4 = LocalStorage.savecell_4,
+			local_removecell = LocalStorage.removecell,
+			schema_get = Schema.get,
         };
 
         public static void Initialize()
