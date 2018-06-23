@@ -1,31 +1,31 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
+# Blend for Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trinity.Client", "Trinity.Client\Trinity.Client.csproj", "{3D6DA1D3-C437-416C-9C73-8DAC07FC472B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trinity.Client.TestClient", "Trinity.Client.TestClient\Trinity.Client.TestClient.csproj", "{6623DF4B-D77E-4967-A0A1-1D5F44F8EDDD}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trinity.Client.TestProtocols", "Trinity.Client.TestProtocols\Trinity.Client.TestProtocols.csproj", "{BF3C0F3B-7BC9-40E2-BD17-947C338EEC1E}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trinity.Client.TestServer", "Trinity.Client.TestServer\Trinity.Client.TestServer.csproj", "{072BD8BE-4078-4F0F-B158-6880AA7B184B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trinity.GE.TestFacilityServer.ProtocolsDefintions", "Trinity.WPF.Test.Protocols\Trinity.GE.TestFacilityServer.ProtocolsDefintions.csproj", "{F55F1870-B54C-40FE-8DBA-8DE9ED476B55}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Trinity GE Test Facility Server", "Trinity GE Test Facility Server", "{563F1C9C-5759-47D9-8B53-1631D8645275}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI ServiceLocator for CastleWindsor Adapter", "UI ServiceLocator for CastleWindsor Adapter", "{61E4DAC6-F896-4D7F-94A3-AD9227D65A47}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Trinity GE WPF TestFacility Infrastructure", "Trinity GE WPF TestFacility Infrastructure", "{86BE1CBD-003E-4AAB-A531-8673F52B5229}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trinity.GE.WPF.UI.Infrastructure", "UI Infrastructure\Trinity.GE.WPF.UI.Infrastructure\Trinity.GE.WPF.UI.Infrastructure.csproj", "{E22B7A0B-6120-427E-94C2-955724D0178A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.CastleWindsorAdapter.ServiceLocator", "UI WPF ServiceLocator\UI.CastleWindsorAdapter.ServiceLocator\UI.CastleWindsorAdapter.ServiceLocator.csproj", "{772C5F8D-266C-4DAA-B7AF-91A99DBDE1AF}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Trinity GE WPF Test Facility UI Modules", "Trinity GE WPF Test Facility UI Modules", "{18097C4F-E453-4E6F-B621-D34D569D84C2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Trinity GE WPF Test Facility Master Shell", "Trinity GE WPF Test Facility Master Shell", "{52D8A13B-BD30-4260-BF1D-71D5AE8D27F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trinity.Client", "Trinity.Client\Trinity.Client.csproj", "{3D6DA1D3-C437-416C-9C73-8DAC07FC472B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trinity.Client.TestClient", "Trinity.Client.TestClient\Trinity.Client.TestClient.csproj", "{6623DF4B-D77E-4967-A0A1-1D5F44F8EDDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trinity.Client.TestProtocols", "Trinity.Client.TestProtocols\Trinity.Client.TestProtocols.csproj", "{BF3C0F3B-7BC9-40E2-BD17-947C338EEC1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trinity.Client.TestServer", "Trinity.Client.TestServer\Trinity.Client.TestServer.csproj", "{072BD8BE-4078-4F0F-B158-6880AA7B184B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trinity.GE.TestFacilityServer.ProtocolsDefintions", "Trinity.WPF.Test.Protocols\Trinity.GE.TestFacilityServer.ProtocolsDefintions.csproj", "{F55F1870-B54C-40FE-8DBA-8DE9ED476B55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trinity.GE.WPF.UI.Infrastructure", "UI Infrastructure\Trinity.GE.WPF.UI.Infrastructure\Trinity.GE.WPF.UI.Infrastructure.csproj", "{E22B7A0B-6120-427E-94C2-955724D0178A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.CastleWindsorAdapter.ServiceLocator", "UI WPF ServiceLocator\UI.CastleWindsorAdapter.ServiceLocator\UI.CastleWindsorAdapter.ServiceLocator.csproj", "{772C5F8D-266C-4DAA-B7AF-91A99DBDE1AF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trinity.GE.WPF.TestFacility.UIShell.Module", "Test Facility Master Shell\Trinity.GE.WPF.TestFacility.UIShell.Module\Trinity.GE.WPF.TestFacility.UIShell.Module.csproj", "{C51048FA-F6F5-4ED9-B0CD-1F16431AA031}"
 EndProject

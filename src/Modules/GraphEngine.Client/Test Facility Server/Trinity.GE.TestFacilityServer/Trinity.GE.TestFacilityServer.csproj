@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\packages\GraphEngine.Core.1.0.9083\build\GraphEngine.Core.props" Condition="Exists('..\..\packages\GraphEngine.Core.1.0.9083\build\GraphEngine.Core.props')" />
+  <Import Project="..\..\packages\GraphEngine.Core.2.0.9328\build\GraphEngine.Core.props" Condition="Exists('..\..\packages\GraphEngine.Core.2.0.9328\build\GraphEngine.Core.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -39,23 +39,29 @@
     <Reference Include="Castle.Windsor, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Castle.Windsor.4.1.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="FanoutSearch, Version=1.0.9083.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GraphEngine.LIKQ.1.0.9083\lib\net46\FanoutSearch.dll</HintPath>
+    <Reference Include="GraphEngine.LIKQ, Version=2.0.9328.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GraphEngine.LIKQ.2.0.9328\lib\net461\GraphEngine.LIKQ.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CodeAnalysis, Version=2.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.CodeAnalysis.Common.2.7.0\lib\netstandard1.3\Microsoft.CodeAnalysis.dll</HintPath>
+    <Reference Include="Microsoft.CodeAnalysis, Version=2.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CodeAnalysis.Common.2.8.0\lib\netstandard1.3\Microsoft.CodeAnalysis.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CodeAnalysis.CSharp, Version=2.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.CodeAnalysis.CSharp.2.7.0\lib\netstandard1.3\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp, Version=2.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CodeAnalysis.CSharp.2.8.0\lib\netstandard1.3\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CodeAnalysis.CSharp.Scripting, Version=2.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.CodeAnalysis.CSharp.Scripting.2.7.0\lib\netstandard1.3\Microsoft.CodeAnalysis.CSharp.Scripting.dll</HintPath>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp.Scripting, Version=2.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CodeAnalysis.CSharp.Scripting.2.8.0\lib\netstandard1.3\Microsoft.CodeAnalysis.CSharp.Scripting.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CodeAnalysis.Scripting, Version=2.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.CodeAnalysis.Scripting.Common.2.7.0\lib\netstandard1.3\Microsoft.CodeAnalysis.Scripting.dll</HintPath>
+    <Reference Include="Microsoft.CodeAnalysis.Scripting, Version=2.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CodeAnalysis.Scripting.Common.2.8.0\lib\netstandard1.3\Microsoft.CodeAnalysis.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.ObjectPool, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Extensions.ObjectPool.2.0.0\lib\netstandard2.0\Microsoft.Extensions.ObjectPool.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Serialize.Linq, Version=1.7.0.0, Culture=neutral, PublicKeyToken=25bcc11ba213b377, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serialize.Linq.1.7.0\lib\net45\Serialize.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.AppContext">
@@ -67,8 +73,8 @@
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Console">
-      <HintPath>..\..\packages\System.Console.4.3.0\lib\net46\System.Console.dll</HintPath>
+    <Reference Include="System.Console, Version=4.0.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Console.4.3.1\lib\net46\System.Console.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Core" />
@@ -141,6 +147,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
       <Private>True</Private>
@@ -196,8 +203,8 @@
       <HintPath>..\..\packages\System.Xml.XPath.XDocument.4.3.0\lib\net46\System.Xml.XPath.XDocument.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Trinity.Core, Version=1.0.9083.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GraphEngine.Core.1.0.9083\lib\net451\Trinity.Core.dll</HintPath>
+    <Reference Include="Trinity.Core, Version=2.0.9328.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GraphEngine.Core.2.0.9328\lib\net461\Trinity.Core.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -242,8 +249,8 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\GraphEngine.Core.1.0.9083\build\GraphEngine.Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\GraphEngine.Core.1.0.9083\build\GraphEngine.Core.props'))" />
-    <Error Condition="!Exists('..\..\packages\GraphEngine.Core.1.0.9083\build\GraphEngine.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\GraphEngine.Core.1.0.9083\build\GraphEngine.Core.targets'))" />
+    <Error Condition="!Exists('..\..\packages\GraphEngine.Core.2.0.9328\build\GraphEngine.Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\GraphEngine.Core.2.0.9328\build\GraphEngine.Core.props'))" />
+    <Error Condition="!Exists('..\..\packages\GraphEngine.Core.2.0.9328\build\GraphEngine.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\GraphEngine.Core.2.0.9328\build\GraphEngine.Core.targets'))" />
   </Target>
-  <Import Project="..\..\packages\GraphEngine.Core.1.0.9083\build\GraphEngine.Core.targets" Condition="Exists('..\..\packages\GraphEngine.Core.1.0.9083\build\GraphEngine.Core.targets')" />
+  <Import Project="..\..\packages\GraphEngine.Core.2.0.9328\build\GraphEngine.Core.targets" Condition="Exists('..\..\packages\GraphEngine.Core.2.0.9328\build\GraphEngine.Core.targets')" />
 </Project>

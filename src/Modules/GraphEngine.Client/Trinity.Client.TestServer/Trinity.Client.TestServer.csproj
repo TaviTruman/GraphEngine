@@ -1,18 +1,19 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.0;net461</TargetFrameworks>
     <OutputType>Exe</OutputType>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
   </PropertyGroup>
-  
   <ItemGroup>
     <TslCodegen Include="**/*.tsl" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="GraphEngine.Core" Version="2.0.9328" />
     <ProjectReference Include="..\Trinity.Client\Trinity.Client.csproj" />
     <ProjectReference Include="..\Trinity.Client.TestProtocols\Trinity.Client.TestProtocols.csproj" />
   </ItemGroup>
-
 </Project>
