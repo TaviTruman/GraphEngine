@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27520.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphEngine.TestFacilityConsole.WPF", "GraphEngine.TestFacilityConsole.WPF\GraphEngine.TestFacilityConsole.WPF.csproj", "{35587CF0-B99A-4E01-B241-D08464C2AA70}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NugetPackage", "NugetPackage", "{49A4FFBC-6B5D-4685-A0EB-D6FA672CBD2D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI Infrastructure", "UI Infrastructure", "{2312E302-EFDF-4F32-A044-4CAF7760E82A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphEngine.TestFacilityConsole.UIInfrastructure", "GraphEngine.TestFacilityConsole.UI.Infrastructure\GraphEngine.TestFacilityConsole.UIInfrastructure.csproj", "{AD8F0508-FB77-4573-944D-FE6CDA753D8A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI Shell", "UI Shell", "{E7638175-9DF3-4560-B805-F096206D190A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphEngine.TestFacilityConsole.UIShell.Module", "UI.Shell\GraphEngine.TestFacilityConsole.UIShell.Module\GraphEngine.TestFacilityConsole.UIShell.Module.csproj", "{BE8342D9-6C33-4BE9-BD85-2C501E42C41B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{35587CF0-B99A-4E01-B241-D08464C2AA70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35587CF0-B99A-4E01-B241-D08464C2AA70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35587CF0-B99A-4E01-B241-D08464C2AA70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35587CF0-B99A-4E01-B241-D08464C2AA70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD8F0508-FB77-4573-944D-FE6CDA753D8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD8F0508-FB77-4573-944D-FE6CDA753D8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD8F0508-FB77-4573-944D-FE6CDA753D8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD8F0508-FB77-4573-944D-FE6CDA753D8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE8342D9-6C33-4BE9-BD85-2C501E42C41B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE8342D9-6C33-4BE9-BD85-2C501E42C41B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE8342D9-6C33-4BE9-BD85-2C501E42C41B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE8342D9-6C33-4BE9-BD85-2C501E42C41B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AD8F0508-FB77-4573-944D-FE6CDA753D8A} = {2312E302-EFDF-4F32-A044-4CAF7760E82A}
+		{BE8342D9-6C33-4BE9-BD85-2C501E42C41B} = {E7638175-9DF3-4560-B805-F096206D190A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3BF8A9D4-FAE6-4773-A9DC-E130550B07EF}
+	EndGlobalSection
+EndGlobal
