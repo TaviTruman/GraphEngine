@@ -49,7 +49,7 @@ namespace Trinity.ServiceFabric.GraphEngineRemotingClient
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                ServiceEventSource.Current.ServiceMessage(this.Context, "Working-{0}", ++iterations);
+                ServiceEventSource.Current.ServiceMessage(this.Context, "Graph Engine Remoting Working-{0}", ++iterations);
 
                 m_trinity.Ping();
 

@@ -36,7 +36,7 @@ namespace Trinity.SampleApplication.ServiceFabric
             // When the cluster is shutting down, it is possible that the secondary replicas
             // become the master. However, these "transient" masters will be blocked, and
             // do not reach this point.
-            Log.WriteLine("Hello world from GE-SF integration!");
+            Log.WriteLine("Hello world from GE-SF Stateful-Service integration!");
             var memcloud = Global.CloudStorage as DynamicMemoryCloud;
 
             // Prevents this host process from terminating so services keep running.
