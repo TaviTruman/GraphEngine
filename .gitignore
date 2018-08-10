@@ -109,5 +109,8 @@ tests/new_test.exe
 **/.ropeproject
 ServiceFabricBackup
 tests/benchmarks/**/*Artifacts*
-**/.vim
+<<<<<<< HEAD
 /src/IKW GE TFC/GE Test Facility Console
+=======
+**/.vim
+>>>>>>> 3662ab3179b7d8d1164c7b2b27bc0a55b7a21713
