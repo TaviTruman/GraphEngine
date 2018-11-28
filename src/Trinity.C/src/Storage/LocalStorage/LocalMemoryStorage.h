@@ -4,7 +4,8 @@
 //
 #pragma once
 #include "TrinityCommon.h"
-#include "Threading/TrinityLock.h"
+#include "Trinity/Storage.h"
+#include "Trinity/Threading/TrinityLock.h"
 #include "Storage/MTHash/MTHash.h"
 #include "Storage/MemoryTrunk/MemoryTrunk.h"
 #include "Storage/LocalStorage/ThreadContext.h"
@@ -16,36 +17,6 @@ namespace Storage
 {
     namespace LocalMemoryStorage
     {
-        enum Int32_Constants : int32_t
-        {
-            c_MaxTrunkCount = 256,
-        };
-
-        /**! Should be synchronized with Trinity.Core\TSL\Lib\Common.cs */
-        enum CellAccessOptions : int32_t
-        {
-            /// <summary>
-            /// No actions. This entry should not be used.
-            /// </summary>
-            None                         = 0x0,
-            /// <summary>
-            /// Throws an exception when a cell is not found.
-            /// </summary>
-            ThrowExceptionOnCellNotFound = 0x1,
-            /// <summary>
-            /// Creates a new cell when a cell is not found.
-            /// </summary>
-            CreateNewOnCellNotFound      = 0x2,
-            /// <summary>
-            /// Specifies that write-ahead-log should be performed with strong durability.
-            /// </summary>
-            StrongLogAhead               = 0x4,
-            /// <summary>
-            /// Specifies that write-ahead-log should be performed with weak durability. This option brings better performance,
-            /// but the durability may be degraded when this option is used.
-            /// </summary>
-            WeakLogAhead                 = 0x8,
-        };
 
         extern std::atomic<bool> initialized;
         extern int32_t trunk_id_mask;
@@ -122,13 +93,6 @@ namespace Storage
 
         // DiskIO
 
-        typedef struct
-        {
-            /* version (ulong) + md5 * trunkCount */
-            uint64_t         version;
-            MD5_SIGNATURE    trunk_signatures[c_MaxTrunkCount];
-        }TRINITY_IMAGE_SIGNATURE, *PTRINITY_IMAGE_SIGNATURE;
-
         String GetPrimaryStorageSlot();
         String GetSecondaryStorageSlot();
 
@@ -140,16 +104,6 @@ namespace Storage
 
         namespace Logging
         {
-#pragma pack(push, 1)
-            typedef struct
-            {
-                cellid_t    CELL_ID;
-                int32_t     CONTENT_LEN;
-                uint16_t    CELL_TYPE;
-                uint8_t     CHECKSUM; // 8-bit second-order check
-            }LOG_RECORD_HEADER, *PLOG_RECORD_HEADER;
-#pragma pack(pop)
-
             void ComputeChecksum(PLOG_RECORD_HEADER plog, char* bufferPtr);
             bool ValidateChecksum(PLOG_RECORD_HEADER plog, char* content);
             void WriteAheadLog(cellid_t cellId, char* cellPtr, int32_t cellSize, uint16_t cellType, CellAccessOptions options);

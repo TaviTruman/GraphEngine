@@ -10,7 +10,7 @@
 #include "Trinity/Configuration/TrinityConfig.h"
 #include "Memory/Memory.h"
 #include "CellEntry.h"
-#include "Threading/TrinityLock.h"
+#include "Trinity/Threading/TrinityLock.h"
 #include "Utility/HashHelper.h"
 #include "Trinity/Diagnostics/Log.h"
 #include "Storage/LocalStorage/ThreadContext.h"
@@ -41,11 +41,9 @@ namespace Storage
 {
     namespace LocalMemoryStorage
     {
-        enum   CellAccessOptions : int32_t;
         extern int32_t* dirty_flags;
     }
 
-    using LocalMemoryStorage::CellAccessOptions;
     class MemoryTrunk;
 
     struct MTHashAllocationInfo
@@ -85,11 +83,20 @@ namespace Storage
             GuardedEntryCount = 1024,
         };
 
-        static uint64_t MTEntryOffset;
-        static uint64_t BucketMemoryOffset;
-        static uint64_t BucketLockerMemoryOffset;
+        static uint64_t MTEntryOffset()
+        {
+            return TrinityConfig::MemoryReserveUnit() / sizeof(CellEntries[0]);
+        }
+        static uint64_t BucketMemoryOffset()
+        {
+            return MTEntryOffset() + TrinityConfig::MemoryReserveUnit() / sizeof(MTEntries[0]);
+        }
+        static uint64_t BucketLockerMemoryOffset()
+        {
+            return BucketMemoryOffset() + TrinityConfig::MemoryReserveUnit() / sizeof(Buckets[0]);
+        }
         static uint64_t LookupLossyCounter;
-        const  uint64_t LookupSlowPathThreshold = 8192;
+        static constexpr uint64_t LookupSlowPathThreshold() { return 8192; }
 
         /*****************************************************************/
         /**************************** 64-byte block **********************/
@@ -205,12 +212,12 @@ namespace Storage
         void _GetBucketLock(uint32_t index);              // High priority. Guarantees success.
 
         ALLOC_THREAD_CTX template<typename TLockAction, typename TLookupFound, typename TLookupNotFound, typename TSetupTx>
-        TrinityErrorCode _Lookup_impl
-		(const cellid_t cellId, 
-		 const TLockAction& entry_lock_action, 
-	     const TLookupFound& found_action, 
-         const TLookupNotFound& not_found_action,
-         const TSetupTx& setup_tx)
+            TrinityErrorCode _Lookup_impl
+            (const cellid_t cellId,
+             const TLockAction& entry_lock_action,
+             const TLookupFound& found_action,
+             const TLookupNotFound& not_found_action,
+             const TSetupTx& setup_tx)
         {
             int32_t          backoff_attempts = 0;
             uint32_t         bucket_index     = GetBucketIndex(cellId);
@@ -223,12 +230,12 @@ namespace Storage
             {
                 goto backoff;
             }
-            
+
             for (int32_t entry_index = Buckets[bucket_index]; entry_index >= 0; entry_index = MTEntries[entry_index].NextEntry)
             {
                 if (MTEntries[entry_index].Key == cellId)
                 {
-                    switch (TrinityErrorCode err = entry_lock_action(entry_index)) 
+                    switch (TrinityErrorCode err = entry_lock_action(entry_index))
                     {
                     case TrinityErrorCode::E_SUCCESS:
                         return found_action(entry_index, bucket_index, previous_entry_index);
@@ -249,7 +256,7 @@ namespace Storage
         backoff:
             if (++backoff_attempts > MTHASH_LOOKUP_MAX_RETRY)
             {
-                if (!tx_setup) 
+                if (!tx_setup)
                 {
                     setup_tx();
                     tx_setup = true;
@@ -265,7 +272,7 @@ namespace Storage
                 }
             }
 
-            if (++LookupLossyCounter < LookupSlowPathThreshold)
+            if (++LookupLossyCounter < LookupSlowPathThreshold())
             {
                 goto start;
             }
@@ -278,7 +285,7 @@ namespace Storage
             {
                 goto backoff;
             }
-            
+
             for (int32_t entry_index = Buckets[bucket_index]; entry_index >= 0; entry_index = MTEntries[entry_index].NextEntry)
             {
                 if (CellEntries[entry_index].location == -1)
@@ -294,10 +301,10 @@ namespace Storage
                     FreeEntry(entry_index);
                     // roll back to previous and jump over
                     entry_index = previous_entry_index;
-                } 
+                }
                 else if (MTEntries[entry_index].Key == cellId)
                 {
-                    switch (TrinityErrorCode err = entry_lock_action(entry_index)) 
+                    switch (TrinityErrorCode err = entry_lock_action(entry_index))
                     {
                     case TrinityErrorCode::E_SUCCESS:
                         return found_action(entry_index, bucket_index, previous_entry_index);
@@ -317,29 +324,29 @@ namespace Storage
 
         template<typename TLookupFound, typename TLookupNotFound>
         inline TrinityErrorCode _Lookup_LockEntry_Or_NotFound
-        (const cellid_t cellId, 
-         const TLookupFound& found_action, 
+        (const cellid_t cellId,
+         const TLookupFound& found_action,
          const TLookupNotFound& not_found_action)
         {
             return _Lookup_impl(
-                cellId, 
-                [this](const int32_t entry_idx) {return TryGetEntryLock(entry_idx); }, 
-                found_action, 
+                cellId,
+                [this](const int32_t entry_idx) {return TryGetEntryLock(entry_idx); },
+                found_action,
                 not_found_action,
                 [=] { PTHREAD_CONTEXT pctx = EnsureCurrentThreadContext(); pctx->SetLockingCell(cellId); });
         }
 
         template<typename TLookupFound, typename TLookupNotFound>
         inline TrinityErrorCode _Lookup_NoLockEntry_Or_NotFound
-        (const cellid_t cellId, 
-         const TLookupFound& found_action, 
+        (const cellid_t cellId,
+         const TLookupFound& found_action,
          const TLookupNotFound& not_found_action)
         {
             return _Lookup_impl(
-                cellId, 
-                [](const int32_t _) {return TrinityErrorCode::E_SUCCESS; }, 
-                found_action, 
-                not_found_action, 
+                cellId,
+                [](const int32_t _) {return TrinityErrorCode::E_SUCCESS; },
+                found_action,
+                not_found_action,
                 [] {});
         }
     };

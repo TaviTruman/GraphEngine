@@ -10,9 +10,9 @@
 #include <istream>
 #include <ostream>
 #include <sstream>
+#include <vector>
 #include <os/os.h>
 #include "Array.h"
-#include "Collections/List.h"
 
 #ifndef __cplusplus_cli
 #include <thread>
@@ -27,8 +27,6 @@ typedef wchar_t u16char;
 typedef char16_t u16char;
 #define _u(x) (u##x)
 #endif
-
-using namespace Trinity::Collections;
 
 namespace Trinity
 {
@@ -439,7 +437,7 @@ namespace Trinity
         template<typename... Args> static String Format(const String& format, Args... arguments)
         {
             String ret(format);
-            List<String> vec;
+            std::vector<String> vec;
             _to_strings(vec, arguments...);
 
             /* Find all templates for formatting */
@@ -486,7 +484,7 @@ namespace Trinity
         {
             return Join(separator.Data(), items...);
         }
-        template<typename T>static inline String Join(const String& separator, const List<T> &items)
+        template<typename T>static inline String Join(const String& separator, const std::vector<T> &items)
         {
             return Join(separator.Data(), items);
         }
@@ -496,13 +494,13 @@ namespace Trinity
         }
         template<typename... Args> static String Join(const char* separator, Args... items)
         {
-            List<String> vec;
+            std::vector<String> vec;
             _to_strings(vec, items...);
-            return _join<List<String>, String>(separator, vec);
+            return _join<std::vector<String>, String>(separator, vec);
         }
-        template<typename T> static inline String Join(const char* separator, const List<T> &items)
+        template<typename T> static inline String Join(const char* separator, const std::vector<T> &items)
         {
-            return _join<List<T>, T>(separator, items);
+            return _join<std::vector<T>, T>(separator, items);
         }
         template<typename T> static inline String Join(const char* separator, const Array<T> &items)
         {
@@ -523,15 +521,15 @@ namespace Trinity
             RemoveEmptyEntries,
             PreserveEmptyEntries,
         };
-        Array<String> Split(const char* seperators, StringSplitOptions option = StringSplitOptions::RemoveEmptyEntries)
+        Array<String> Split(const char* separators, StringSplitOptions option = StringSplitOptions::RemoveEmptyEntries)
         {
-            List<String> vec;
+            std::vector<String> vec;
             size_t split_head = 0;
             size_t search_idx = 0;
             bool non_empty_matched = false;//is the entry before last search_idx non-empty
             while (true)
             {
-                split_head = FindFirstNotOf(seperators, search_idx);
+                split_head = FindFirstNotOf(separators, search_idx);
                 bool split_head_found = (npos != split_head);
 
                 if (option == StringSplitOptions::PreserveEmptyEntries)
@@ -554,7 +552,7 @@ namespace Trinity
 
                 if (npos == split_head)
                     break;
-                search_idx = FindFirstOf(seperators, split_head);
+                search_idx = FindFirstOf(separators, split_head);
                 if (npos == search_idx)
                 {
                     vec.emplace_back(Substring(split_head, Length() - split_head));
@@ -778,8 +776,8 @@ namespace Trinity
     private:
 
 #pragma region Private methods
-        static void _to_strings(List<String>& vec) { (void*)(&vec); }
-        template<typename T, typename... Args> static void _to_strings(List<String>& vec, T firstArgument, Args... restArguments)
+        static void _to_strings(std::vector<String>& vec) { (void*)(&vec); }
+        template<typename T, typename... Args> static void _to_strings(std::vector<String>& vec, T firstArgument, Args... restArguments)
         {
             vec.emplace_back(ToString(firstArgument));
             _to_strings(vec, restArguments...);

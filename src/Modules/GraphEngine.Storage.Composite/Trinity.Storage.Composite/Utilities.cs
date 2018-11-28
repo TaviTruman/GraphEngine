@@ -32,12 +32,12 @@ namespace Trinity.Storage.Composite
             foreach (var e in collection) { fn(e); }
             end?.Invoke();
         }
-        public static void Each<ElemType, State>(this IEnumerable<ElemType> colllection,
+        public static void Each<ElemType, State>(this IEnumerable<ElemType> collection,
                                                  Action<ElemType, State> fn,
                                                  Action<State> end = null) where State : new()
         {
             State s = new State();
-            foreach (var e in colllection) { fn(e, s); }
+            foreach (var e in collection) { fn(e, s); }
             end?.Invoke(s);
         }
         #endregion
@@ -62,6 +62,12 @@ namespace Trinity.Storage.Composite
     public static class Utils
     {
         private const string s_session_flag_file = ".session.inprogress";
+
+        public static string MyAssemblyVersion()
+        {
+            var version = typeof(Utils).Assembly.GetName().Version;
+            return $"{version.Major}.{version.Minor}.{version.Build}";
+        }
 
         public static void Session(string path, Action start, Action<Exception> err, Action end, Action behavior, Action final = null)
         {

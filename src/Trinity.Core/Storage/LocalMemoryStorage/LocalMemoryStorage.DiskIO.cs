@@ -24,6 +24,11 @@ namespace Trinity.Storage
 {
     public unsafe partial class LocalMemoryStorage
     {
+        public TrinityErrorCode ApplyDelta(string mpFilePath, string indexFilePath, string loFilePath)
+        {
+            return CLocalMemoryStorage.LoadIncrementalDiskImage(mpFilePath, indexFilePath, loFilePath);
+        }
+
         /// <summary>
         /// Loads Trinity key-value store from disk to main memory.
         /// </summary>
@@ -61,6 +66,9 @@ namespace Trinity.Storage
             lock (m_lock)
             {
                 TrinityErrorCode ret = CSynchronizeStorageRoot();
+                if (TrinityErrorCode.E_SUCCESS != ret) { return ret; }
+
+                ret = RaiseStorageEvent(StorageBeforeSave, nameof(StorageBeforeSave));
                 if (TrinityErrorCode.E_SUCCESS != ret) { return ret; }
 
                 ret = CLocalMemoryStorage.CSaveStorage();

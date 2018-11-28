@@ -37,10 +37,6 @@ namespace Storage
         TrinityErrorCode Initialize()
         {
             //TODO tell if local storage has already been initialized. Useful for mutli-tenant applications.
-            uint64_t MemoryReserveUnit       = TrinityConfig::MemoryReserveUnit();
-            MTHash::MTEntryOffset            = (MemoryReserveUnit << 3); // skip CellEntries
-            MTHash::BucketMemoryOffset       = MTHash::MTEntryOffset + (MemoryReserveUnit << 4);
-            MTHash::BucketLockerMemoryOffset = MTHash::BucketMemoryOffset + (MemoryReserveUnit << 2);
 
             trunk_count                      = TrinityConfig::TrunkCount();
             trunk_id_mask                    = trunk_count - 1;
@@ -126,6 +122,9 @@ namespace Storage
                 hashtables = nullptr;
                 hashtables_end = nullptr;
                 g_ImageSignature = nullptr;
+
+                Memory::FreeMemoryRegion(MemoryPtr, TrinityConfig::TrinityReservedSpace());
+                MemoryPtr = nullptr;
 
                 disposed.store(true);
             }
@@ -711,7 +710,7 @@ namespace Storage
             return total;
         }
 
-        static uint64_t _CellCount_impl()
+        uint64_t _CellCount_impl()
         {
             uint64_t total = 0;
             for (int32_t i = 0; i < trunk_count; i++)
