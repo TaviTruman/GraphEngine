@@ -83,7 +83,6 @@ slnx.sqlite
 /src/Modules/Spark/spark-trinity/project/target
 /src/Modules/Spark/spark-trinity/target
 /src/Modules/Spark/spark-trinity/.idea
-/src/Trinity.C/Makefile
 xUnitReports
 tools/NuGet.exe
 tools/dotnet/*
@@ -113,4 +112,9 @@ tests/benchmarks/**/*Artifacts*
 /src/IKW GE TFC/GE Test Facility Console
 =======
 **/.vim
+<<<<<<< HEAD
 >>>>>>> 3662ab3179b7d8d1164c7b2b27bc0a55b7a21713
+=======
+CMakeSettings.json
+Directory.Build.props
+>>>>>>> 3a83cba54f5d3d9b2cb1e6cf34670679a9dffcce
